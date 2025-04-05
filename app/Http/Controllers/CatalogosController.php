@@ -10,7 +10,7 @@ use App\Models\DetEmpPuesto;
 use App\Models\Abono;
 use Carbon\Carbon AS SupportCarbon;
 use DateTime;
-
+use Illuminate\Http\Request;
 
 class CatalogosController extends Controller
 {
@@ -42,6 +42,19 @@ class CatalogosController extends Controller
             ]
         ]);
     }
+
+    public function puestosEliminarPost(Request $request)
+    {
+        $puesto = Puesto::findOrFail($request->input('id_puesto'));
+        
+        // Primero eliminamos los detalles de empleado-puesto relacionados
+        DetEmpPuesto::where('fk_id_puesto', $puesto->id_puesto)->delete();
+        
+        // Luego eliminamos el puesto
+        $puesto->delete();
+
+        return redirect('/catalogos/puestos')->with('success', 'Puesto eliminado exitosamente');
+    }
     // Termina Puestos
 
     // Empleados
@@ -68,6 +81,19 @@ class CatalogosController extends Controller
                 "Agregar" => url("/movimientos/empleados/agregar")
             ]
         ]);
+    }
+
+    public function empleadosEliminarPost(Request $request)
+    {
+        $empleado = Empleado::findOrFail($request->input('id_empleado'));
+        
+        // Primero eliminamos el detalle del empleado-puesto
+        DetEmpPuesto::where('fk_id_empleado', $empleado->id_empleado)->delete();
+        
+        // Luego eliminamos el empleado
+        $empleado->delete();
+
+        return redirect('/catalogos/empleados')->with('success', 'Empleado eliminado exitosamente');
     }
     // Termina Empleados
 

@@ -18,8 +18,7 @@ class MovimientosController extends Controller
     {
         $puesto = new Puesto([
             'nombre' => strtoupper($request->input('nombre')),
-            'sueldo' => $request->input('sueldo'),
-            'estado' => $request->input('estado')
+            'sueldo' => $request->input('sueldo')
         ]);
         $puesto->save();
 
@@ -94,7 +93,7 @@ class MovimientosController extends Controller
         ]);
 
         $abono = new Abono([
-            'id_prestamo' => $validated['id_prestamo'],
+            'fk_id_prestamo' => $validated['id_prestamo'],
             'num_abono' => $validated['num_abono'],
             'fecha' => $validated['fecha'],
             'monto_capital' => $validated['monto_capital'],
@@ -158,7 +157,6 @@ class MovimientosController extends Controller
             'apellidoP'    => strtoupper($request->input('apellidoP')),
             'apellidoM'    => strtoupper($request->input('apellidoM')),
             'fecha_inicio' => $request->input('fecha_inicio'),
-            'activo'       => $request->input('estado'),
             'fk_id_puesto' => $puesto->id_puesto,
             'sueldo'       => $puesto->sueldo
         ]);

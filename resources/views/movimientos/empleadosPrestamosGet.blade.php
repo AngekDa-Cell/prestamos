@@ -20,11 +20,9 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Estado</th>
                 <th scope="col">Fecha de Aprobación</th>
                 <th scope="col">Fecha de Solicitud</th>
                 <th scope="col">Monto</th>
-                <th scope="col">ID Empleado</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
@@ -32,16 +30,10 @@
             @foreach($prestamos as $prestamo)
                 <tr>
                     <td class="text-center">{{ $prestamo->id_prestamo }}</td>
-                    <td class="text-center">{{ $prestamo->estado }}</td>
-                    <td class="text-center">{{ $prestamo->fecha_aprob }}</td>
-                    <td class="text-center">{{ $prestamo->fecha_solicitud }}</td>
-                    <td class="text-center">{{ $prestamo->monto }}</td>
-                    <td class="text-center">{{ $prestamo->fk_id_empleado }}</td>
-                    <td class="text-center">
-                        <a class="btn btn-warning btn-sm" href="{{ url('/movimientos/prestamos/editar/'.$prestamo->id_prestamo) }}">
-                            Cambiar
-                        </a>
-                    </td>
+                    <td class="text-center">{{ \Carbon\Carbon::parse($prestamo->fecha_aprob)->format('d/m/Y') }}</td>
+                    <td class="text-center">{{ \Carbon\Carbon::parse($prestamo->fecha_solicitud)->format('d/m/Y') }}</td>
+                    <td class="text-center">${{ number_format($prestamo->monto, 2) }}</td>
+                    <td class="text-center"><a href="{{ url('/movimientos/prestamos/abonos/' . $prestamo->id_prestamo) }}">Abonos</a></td>
                 </tr>
             @endforeach
         </tbody>

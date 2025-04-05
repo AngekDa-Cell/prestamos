@@ -15,6 +15,7 @@ Route::get('/', function () {
 
 //Puestos
 Route::get("/catalogos/puestos", [CatalogosController::class, 'puestosGet']);
+Route::post("/catalogos/puestos/eliminar", [CatalogosController::class, 'puestosEliminarPost']);
 //Puestos Acciones
 Route::get("/movimientos/puestos/agregar", [CatalogosController::class, 'puestosAgregarGet']);
 Route::post("/movimientos/puestos/agregado", [MovimientosController::class, 'puestosAgregarPost']);
@@ -23,6 +24,7 @@ Route::post("/movimientos/puestos/agregado", [MovimientosController::class, 'pue
 
 //Empleados
 Route::get("/catalogos/empleados", [CatalogosController::class, 'empleadosGet']);
+Route::post("/catalogos/empleados/eliminar", [CatalogosController::class, 'empleadosEliminarPost']);
 // Empleados Puestos
 Route::get("/movimientos/empleados/puestos/{id_empleado}", [CatalogosController::class, 'empleadosPuestosGet'])->where('id_empleado', '[0-9]+');
 // Empleados Prestamos
@@ -43,7 +45,7 @@ Route::post("/movimientos/prestamos/agregado", [MovimientosController::class, 'p
 Route::get("/movimientos/prestamos/editar/{id_prestamo}", [CatalogosController::class, 'prestamosEditarGet'])->where('id_prestamo', '[0-9]+');
 
 //Abonos
-Route::get("/movimientos/prestamos/abonos/{id_prestamo}", [CatalogosController::class, 'abonosGet'])->where('id_prestamo', '[0-9]+');
+Route::get("/movimientos/prestamos/abonos/{id_prestamo}", [CatalogosController::class, 'abonosGet'])->where('id_prestamo', '[0-9]+')->name('catalogos.abonos');
 Route::get("/movimientos/prestamos/abonos/editar/{id_abono}", [CatalogosController::class, 'abonosEditarGet'])->where('id_abono', '[0-9]+');
 Route::get("/movimientos/prestamos/abonos/agregar/{id_prestamo}", [MovimientosController::class, 'abonosAgregarGet'])->where('id_prestamo', '[0-9]+');
 Route::post("/movimientos/prestamos/abonos/agregar/{id_prestamo}", [MovimientosController::class, 'abonosAgregarPost'])->name('movimientos.abonos.agregar');

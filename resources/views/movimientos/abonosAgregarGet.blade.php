@@ -19,7 +19,7 @@
         <div class="col-2"><strong>FECHA APROBACIÓN</strong></div>
         <div class="col-2">{{$prestamo->fecha_aprob}}</div>
         <div class="col-2"><strong>MONTO PRESTADO</strong></div>
-        <div class="col-2">{{ number_format($prestamo->monto, 2) }}</div>
+        <div class="col-2">${{ number_format($prestamo->monto, 2) }}</div>
     </div>
 </div>
 
@@ -30,35 +30,37 @@
 
     <div class="row my-4">
         <div class="form-group mb-3 col-6">
-            <label for="num_abono">Número de abono:</label>
-            <input type="number" value="{{$num_abono}}" name="num_abono" id="num_abono" class="form-control" required>
+            <label class="form-label">Número de abono:</label>
+            <div class="form-control-plaintext">{{$num_abono}}</div>
+            <input type="hidden" name="num_abono" value="{{$num_abono}}">
         </div>
         <div class="form-group mb-3 col-6">
-            <label for="fecha">Fecha</label>
+            <label class="form-label">Fecha del abono:</label>
             <input type="date" value="{{ now()->format('Y-m-d') }}" name="fecha" id="fecha" class="form-control" required>
         </div>
     </div>
 
     <div class="row">
         <div class="form-group mb-3 col-6">
-            <label for="monto_capital">Monto a capital</label>
+            <label class="form-label">Monto a capital ($):</label>
             <input type="number" value="{{ number_format($pago_fijo_cap, 2, '.', '') }}" step="0.01" name="monto_capital" id="monto_capital" class="form-control" required>
         </div>
 
         <div class="form-group mb-3 col-6">
-            <label for="monto_interes">Monto interés:</label>
+            <label class="form-label">Monto de interés ($):</label>
             <input type="number" value="{{ number_format($monto_interes, 2, '.', '') }}" step="0.01" name="monto_interes" id="monto_interes" class="form-control" required>
         </div>
     </div>
 
     <div class="row">
         <div class="form-group mb-3 col-6">
-            <label for="monto_cobrado">Monto cobrado</label>
+            <label class="form-label">Monto total cobrado ($):</label>
             <input type="number" value="{{ number_format($monto_cobrado, 2, '.', '') }}" step="0.01" name="monto_cobrado" id="monto_cobrado" class="form-control" required>
         </div>
         <div class="form-group mb-3 col-6">
-            <label for="saldo_pendiente">Saldo actual</label>
-            <input type="number" value="{{ isset($saldo_pendiente) ? number_format($saldo_pendiente, 2, '.', '') : '0.00' }}" step="0.01" name="saldo_pendiente" id="saldo_pendiente" class="form-control" required>
+            <label class="form-label">Saldo actual ($):</label>
+            <div class="form-control-plaintext">${{ isset($saldo_pendiente) ? number_format($saldo_pendiente, 2, '.', '') : '0.00' }}</div>
+            <input type="hidden" name="saldo_pendiente" value="{{ isset($saldo_pendiente) ? $saldo_pendiente : 0 }}">
         </div>
     </div>
 

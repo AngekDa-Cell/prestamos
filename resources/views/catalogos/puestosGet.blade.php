@@ -17,7 +17,7 @@
                 <th class="text-center">ID Puesto</th>
                 <th class="text-center">Puesto</th>
                 <th class="text-center">Sueldo</th>
-                <th class="text-center">Estado</th>
+                <th class="text-center">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -27,11 +27,13 @@
                     <td class="text-center">{{ $puesto->nombre }}</td>
                     <td class="text-center">${{ number_format($puesto->sueldo, 2) }}</td>
                     <td class="text-center">
-                        @if ($puesto->estado == 'activo')
-                            <span class="badge bg-success">Activo</span>
-                        @else
-                            <span class="badge bg-danger">Inactivo</span>
-                        @endif
+                        <form action="/catalogos/puestos/eliminar" method="POST" class="d-inline">
+                            @csrf
+                            <input type="hidden" name="id_puesto" value="{{ $puesto->id_puesto }}">
+                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este puesto?')">
+                                Eliminar
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @empty

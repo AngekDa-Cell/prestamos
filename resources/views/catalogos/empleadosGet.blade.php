@@ -33,7 +33,13 @@
                     <td class="text-center d-flex justify-content-center gap-2">
                         <a href="{{ url('/movimientos/empleados/puestos/' . $empleado->id_empleado) }}" class="btn btn-sm btn-outline-secondary">Puesto</a>
                         <a href="{{ url('/movimientos/empleados/prestamos/' . $empleado->id_empleado) }}" class="btn btn-sm btn-outline-info">Préstamos</a>
-                        <a href="{{ url('/movimientos/empleados/editar/' . $empleado->id_empleado) }}" class="btn btn-sm btn-outline-primary">Editar</a>
+                        <form action="/catalogos/empleados/eliminar" method="POST" class="d-inline">
+                            @csrf
+                            <input type="hidden" name="id_empleado" value="{{ $empleado->id_empleado }}">
+                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?')">
+                                Eliminar
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @empty

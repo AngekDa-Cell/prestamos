@@ -56,10 +56,10 @@
                         <td class="text-center">{{ $abono->id_abono }}</td>
                         <td class="text-center">{{ $index + 1 }}</td>
                         <td class="text-center">{{ $abono->fecha }}</td>
-                        <td class="text-center">{{ number_format($abono->monto_capital, 2) }}</td>
-                        <td class="text-center">{{ number_format($abono->monto_otros, 2) }}</td> 
-                        <td class="text-center">{{ number_format($abono->monto_capital + $abono->monto_otros, 2) }}</td> 
-                        <td class="text-center">{{ number_format($abono->saldo_pendiente, 2) }}</td> 
+                        <td class="text-center">${{ number_format($abono->monto_capital, 2) }}</td>
+                        <td class="text-center">${{ number_format($abono->monto_interes, 2) }}</td>
+                        <td class="text-center">${{ number_format($abono->monto_cobrado, 2) }}</td>
+                        <td class="text-center">${{ number_format($abono->saldo_pendiente, 2) }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -81,14 +81,14 @@
         let totalCapital = 0, totalInteres = 0, totalCobrado = 0;
         
         document.querySelectorAll("#maintable tbody tr").forEach(row => {
-            totalCapital += parseFloat(row.cells[3].textContent.replace(/,/g, '')) || 0;
-            totalInteres += parseFloat(row.cells[4].textContent.replace(/,/g, '')) || 0;
-            totalCobrado += parseFloat(row.cells[5].textContent.replace(/,/g, '')) || 0;
+            totalCapital += parseFloat(row.cells[3].textContent.replace(/,/g, '').replace('$', '')) || 0;
+            totalInteres += parseFloat(row.cells[4].textContent.replace(/,/g, '').replace('$', '')) || 0;
+            totalCobrado += parseFloat(row.cells[5].textContent.replace(/,/g, '').replace('$', '')) || 0;
         });
 
-        document.getElementById("totalCapital").textContent = totalCapital.toLocaleString(undefined, {minimumFractionDigits: 2});
-        document.getElementById("totalInteres").textContent = totalInteres.toLocaleString(undefined, {minimumFractionDigits: 2});
-        document.getElementById("totalCobrado").textContent = totalCobrado.toLocaleString(undefined, {minimumFractionDigits: 2});
+        document.getElementById("totalCapital").textContent = '$' + totalCapital.toLocaleString(undefined, {minimumFractionDigits: 2});
+        document.getElementById("totalInteres").textContent = '$' + totalInteres.toLocaleString(undefined, {minimumFractionDigits: 2});
+        document.getElementById("totalCobrado").textContent = '$' + totalCobrado.toLocaleString(undefined, {minimumFractionDigits: 2});
     });
 </script>
 

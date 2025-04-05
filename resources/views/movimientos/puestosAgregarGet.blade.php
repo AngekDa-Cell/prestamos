@@ -23,13 +23,6 @@
         <label for="sueldo">Sueldo</label>
         <input type="number" class="form-control" id="sueldo" name="sueldo" required>
     </div>
-    <div class="form-group">
-        <label for="estado">Estado</label>
-        <select class="form-control" id="estado" name="estado" required>
-            <option value="1">Activo</option>
-            <option value="0">Inactivo</option>
-        </select>
-    </div>
     <br>
     <button type="submit" class="btn btn-primary">Agregar Puesto</button>
 </form>

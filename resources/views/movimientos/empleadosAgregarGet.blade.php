@@ -43,14 +43,6 @@
                     @endforeach
                 </select>
             </div>
-
-            <div class="col-md-6 mb-3">
-                <label for="estado">Estado</label>
-                <select class="form-control" id="estado" name="estado" required>
-                    <option value="1">Activo</option>
-                    <option value="0">Inactivo</option>
-                </select>
-            </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Agregar Empleado</button>
