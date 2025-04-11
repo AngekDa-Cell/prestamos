@@ -60,7 +60,7 @@ class CatalogosController extends Controller
     // Empleados
     public function empleadosGet(): View
     {
-        $empleados = Empleado::all();
+        $empleados = Empleado::with('puestos')->get();
         return view('catalogos.empleadosGet', [
             'empleados' => $empleados,
             "breadcrumbs" => [
