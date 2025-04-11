@@ -13,7 +13,7 @@ class Empleado extends Model
     protected $primaryKey = 'id_empleado';
     public $incrementing = true;
     protected $keyType = 'int';
-    protected $fillable = ['nombre', 'apellidoP', 'apellidoM', 'fecha_ingreso'];
+    protected $fillable = ['nombre', 'apellidoP', 'apellidoM', 'fecha_inicio'];
     public $timestamps = false;
 
     public function prestamos()
