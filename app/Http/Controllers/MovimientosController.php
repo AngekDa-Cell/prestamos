@@ -167,6 +167,7 @@ class MovimientosController extends Controller
             'fk_id_empleado' => $empleado->id_empleado,
             'fecha_inicio'   => $request->input('fecha_inicio')
         ]);
+        $detallePuesto->fecha_inicio = $request->input('fecha_inicio'); // Asegurar que la fecha se guarde correctamente
         $detallePuesto->save();
 
         return redirect('/catalogos/empleados');
