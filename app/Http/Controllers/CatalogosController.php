@@ -116,15 +116,23 @@ class CatalogosController extends Controller
             ]
         ]);
     }
+
     public function prestamosAgregarGet(): View
     {
-        $haceunanno = (new DateTime("-1 year"))->format("Y-m-d");
-        $empleados = Empleado::where("fecha_ingreso","<",$haceunanno)->get()->all();
-        $fecha_actual = SupportCarbon::now();
-        $prestamosvigentes = Prestamo::where("fecha_ini_desc","<=",$fecha_actual)->where("fecha_fin_desc",">=",$fecha_actual)->get()->all();
-        $empleados = array_column($empleados, null,"id_empleado");
-        $prestamosvigentes = array_column($prestamosvigentes, null,"id_empleado");
-        $empleados=array_diff_key($empleados,$prestamosvigentes);
+        // Obtener todos los empleados
+        $empleados = Empleado::all();
+        
+        // Obtener empleados con préstamos vigentes
+        $prestamosvigentes = Prestamo::whereNull('fecha_fin_descuento')
+            ->orWhere(function ($query) {
+                $query->where('fecha_fin_descuento', '>=', now())
+                    ->where('fecha_inicio_descuento', '<=', now());
+            })
+            ->pluck('fk_id_empleado');
+
+        // Filtrar empleados que no tienen préstamos vigentes
+        $empleados = $empleados->whereNotIn('id_empleado', $prestamosvigentes);
+
         return view("movimientos/prestamosAgregarGet", [
             "empleados" => $empleados,
             "breadcrumbs" => [
@@ -134,6 +142,7 @@ class CatalogosController extends Controller
             ]
         ]);
     }
+
     public function prestamosEditarGet($id_prestamo): View
     {
         $prestamo = Prestamo::findOrFail($id_prestamo);
