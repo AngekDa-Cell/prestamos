@@ -123,10 +123,10 @@ class CatalogosController extends Controller
         $empleados = Empleado::all();
         
         // Obtener empleados con préstamos vigentes
-        $prestamosvigentes = Prestamo::whereNull('fecha_fin_descuento')
+        $prestamosvigentes = Prestamo::whereNull('fecha_fin_desc')
             ->orWhere(function ($query) {
-                $query->where('fecha_fin_descuento', '>=', now())
-                    ->where('fecha_inicio_descuento', '<=', now());
+                $query->where('fecha_fin_desc', '>=', now())
+                    ->where('fecha_ini_desc', '<=', now());
             })
             ->pluck('fk_id_empleado');
 
