@@ -29,7 +29,7 @@
                     <td class="text-center">{{ $empleado->nombre }}</td>
                     <td class="text-center">{{ $empleado->apellidoP }}</td>
                     <td class="text-center">{{ $empleado->apellidoM }}</td>
-                    <td class="text-center">{{ $empleado->puestos->first() ? \Carbon\Carbon::parse($empleado->puestos->first()->pivot->fecha_inicio)->format('d/m/Y') : 'Sin fecha' }}</td>
+                    <td class="text-center">{{ \Carbon\Carbon::parse($empleado->fecha_ingreso)->format('d/m/Y') }}</td>
                     <td class="text-center d-flex justify-content-center gap-2">
                         <a href="{{ url('/movimientos/empleados/puestos/' . $empleado->id_empleado) }}" class="btn btn-sm btn-outline-secondary">Puesto</a>
                         <a href="{{ url('/movimientos/empleados/prestamos/' . $empleado->id_empleado) }}" class="btn btn-sm btn-outline-info">Préstamos</a>

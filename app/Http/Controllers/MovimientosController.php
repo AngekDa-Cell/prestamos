@@ -156,7 +156,7 @@ class MovimientosController extends Controller
             'nombre'       => strtoupper($request->input('nombre')),
             'apellidoP'    => strtoupper($request->input('apellidoP')),
             'apellidoM'    => strtoupper($request->input('apellidoM')),
-            'fecha_inicio' => $request->input('fecha_inicio'),
+            'fecha_ingreso' => $request->input('fecha_inicio'),
             'fk_id_puesto' => $puesto->id_puesto,
             'sueldo'       => $puesto->sueldo
         ]);
